@@ -1,6 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App'
-import Todo from './components/Todo'
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 
-ReactDOM.render(<Todo />, document.querySelector("#app"));
+import App from './components/App';
+import reducers from './reducers';
+
+const store = createStore(
+    reducers,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
+const Entry = () => (
+    <Provider store={store}>
+        <App />
+    </Provider>
+)
+ 
+
+
+ReactDOM.render(<Entry />, document.querySelector("#app"));
